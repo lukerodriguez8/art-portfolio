@@ -28,11 +28,14 @@ const { works } = Astro.props;
               <img
                 src={`/works/${work.filename}`}
                 alt={work.title}
-                width={work.width}
-                height={work.height}
+                width={work.width ?? undefined}
+                height={work.height ?? undefined}
                 loading={i < 4 ? "eager" : "lazy"}
                 decoding="async"
                 fetchpriority={i < 2 ? "high" : "auto"}
+                style={work.width && work.height
+                  ? `aspect-ratio:${work.width}/${work.height}`
+                  : undefined}
               />
             </figure>
             <figcaption>
