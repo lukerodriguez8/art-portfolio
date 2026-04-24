@@ -101,6 +101,7 @@ function parseExistingWorks(source) {
       const m = block.match(new RegExp(`${key}:\\s*["'\`]([^"'\`]*)["'\`]`));
       return m ? m[1] : undefined;
     };
+    const getSeries = () => get("series");
     const getNum = (key) => {
       const m = block.match(new RegExp(`${key}:\\s*(\\d+)`));
       return m ? parseInt(m[1]) : undefined;
@@ -112,6 +113,7 @@ function parseExistingWorks(source) {
       title: get("title") ?? titleFromFilename(filename),
       year: getNum("year") ?? new Date().getFullYear(),
       medium: get("medium"),
+      series: getSeries(),
       filename,
       width: getNum("width") ?? 0,
       height: getNum("height") ?? 0,
@@ -141,6 +143,7 @@ function serialize(work) {
     `    title: "${work.title}",`,
     `    year: ${work.year},`,
     work.medium ? `    medium: "${work.medium}",` : null,
+    work.series ? `    series: "${work.series}",` : null,
     `    filename: "${work.filename}",`,
     `    width: ${work.width},`,
     `    height: ${work.height},`,
@@ -195,6 +198,7 @@ for (const file of files) {
       title: titleFromFilename(file),
       year: new Date().getFullYear(),
       medium: undefined,
+      series: undefined,
       filename: file,
       width: dims.width,
       height: dims.height,

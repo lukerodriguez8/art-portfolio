@@ -3,6 +3,7 @@ export interface Work {
   title: string;
   year: number;
   medium?: string;
+  series?: string; // e.g. "Notebook", "Paintings", etc.
   filename: string;
   width: number;
   height: number;
@@ -13,6 +14,7 @@ export const works: Work[] = [
     id: "1",
     title: "1",
     year: 2026,
+    series: "Notebook",
     filename: "1.png",
     width: 1420,
     height: 1098,
@@ -21,6 +23,7 @@ export const works: Work[] = [
     id: "2",
     title: "2",
     year: 2026,
+    series: "Notebook",
     filename: "2.png",
     width: 1257,
     height: 1202,
@@ -29,6 +32,7 @@ export const works: Work[] = [
     id: "3",
     title: "3",
     year: 2026,
+    series: "Notebook",
     filename: "3.png",
     width: 2115,
     height: 1461,
@@ -37,6 +41,7 @@ export const works: Work[] = [
     id: "4",
     title: "4",
     year: 2026,
+    series: "Notebook",
     filename: "4.png",
     width: 1728,
     height: 2424,
@@ -45,6 +50,7 @@ export const works: Work[] = [
     id: "5",
     title: "5",
     year: 2026,
+    series: "Notebook",
     filename: "5.png",
     width: 2424,
     height: 1728,
@@ -53,6 +59,7 @@ export const works: Work[] = [
     id: "6",
     title: "6",
     year: 2026,
+    series: "Notebook",
     filename: "6.png",
     width: 1541,
     height: 2092,
@@ -61,6 +68,7 @@ export const works: Work[] = [
     id: "7",
     title: "7",
     year: 2026,
+    series: "Notebook",
     filename: "7.png",
     width: 1618,
     height: 2388,
@@ -69,6 +77,7 @@ export const works: Work[] = [
     id: "8",
     title: "8",
     year: 2026,
+    series: "Notebook",
     filename: "8.png",
     width: 1550,
     height: 1922,
@@ -77,8 +86,9 @@ export const works: Work[] = [
     id: "9",
     title: "9",
     year: 2026,
+    series: "Notebook",
     filename: "9.png",
     width: 2424,
     height: 1728,
-  }
+  },
 ];

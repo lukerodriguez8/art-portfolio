@@ -3,52 +3,57 @@ import type { Work } from "../data/works";
 
 interface Props {
   works: Work[];
+  title?: string;
 }
 
-const { works } = Astro.props;
+const { works, title } = Astro.props;
 ---
 
 <section class="gallery container">
-  {
-    works.length === 0 ? (
-      <div class="empty-state">
-        <p>Add your artwork to <code>src/data/works.ts</code> and drop files in <code>public/works/</code></p>
-      </div>
-    ) : (
-      <div class="gallery-grid">
-        {works.map((work, i) => (
-          <article
-            class="gallery-item reveal"
-            data-id={work.id}
-            data-src={`/works/${work.filename}`}
-            data-title={work.title}
-            data-meta={`${work.medium ? work.medium + " · " : ""}${work.year}`}
-          >
-            <figure>
-              <img
-                src={`/works/${work.filename}`}
-                alt={work.title}
-                width={work.width ?? undefined}
-                height={work.height ?? undefined}
-                loading={i < 4 ? "eager" : "lazy"}
-                decoding="async"
-                fetchpriority={i < 2 ? "high" : "auto"}
-                style={work.width && work.height
-                  ? `aspect-ratio:${work.width}/${work.height}`
-                  : undefined}
-              />
-            </figure>
-            <figcaption>
-              <span class="caption-title">{work.title}</span>
-              <span class="caption-meta">
-                {work.medium && `${work.medium} · `}{work.year}
-              </span>
-            </figcaption>
-          </article>
-        ))}
-      </div>
-    )
-  }
+  {title && (
+    <header class="section-header reveal">
+      <h2 class="section-title">{title}</h2>
+    </header>
+  )}
+
+  {works.length === 0 ? (
+    <div class="empty-state">
+      <p>Add artwork to <code>public/works/</code> and run <code>npm run sync</code></p>
+    </div>
+  ) : (
+    <div class="gallery-grid">
+      {works.map((work, i) => (
+        <article
+          class="gallery-item reveal"
+          data-id={work.id}
+          data-src={`/works/${work.filename}`}
+          data-title={work.title}
+          data-meta={`${work.medium ? work.medium + " · " : ""}${work.year}`}
+        >
+          <figure>
+            <img
+              src={`/works/${work.filename}`}
+              alt={work.title}
+              width={work.width ?? undefined}
+              height={work.height ?? undefined}
+              loading={i < 4 ? "eager" : "lazy"}
+              decoding="async"
+              fetchpriority={i < 2 ? "high" : "auto"}
+              style={work.width && work.height
+                ? `aspect-ratio:${work.width}/${work.height}`
+                : undefined}
+            />
+          </figure>
+          <figcaption>
+            <span class="caption-title">{work.title}</span>
+            <span class="caption-meta">
+              {work.medium && `${work.medium} · `}{work.year}
+            </span>
+          </figcaption>
+        </article>
+      ))}
+    </div>
+  )}
 </section>
 
 <!-- Lightbox -->

@@ -3,13 +3,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Gallery from "../components/Gallery.astro";
 import { works } from "../data/works";
+
+// Group works by series; unsorted works go under undefined
+const seriesMap = new Map<string | undefined, typeof works>();
+
+for (const work of works) {
+  const key = work.series;
+  if (!seriesMap.has(key)) seriesMap.set(key, []);
+  seriesMap.get(key)!.push(work);
+}
+
+// Sections: named series first (in order of first appearance), then ungrouped
+const sections = [...seriesMap.entries()];
 ---
 
 <BaseLayout>
   <Header />
 
   <main>
-    <Gallery works={works} />
+    {sections.length === 0 ? (
+      <Gallery works={[]} />
+    ) : (
+      sections.map(([title, items]) => (
+        <Gallery works={items} title={title} />
+      ))
+    )}
 
     <section class="about container" id="about">
       <p>
