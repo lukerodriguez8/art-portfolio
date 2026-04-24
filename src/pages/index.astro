@@ -1,17 +1,29 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Gallery from "../components/Gallery.astro";
+import { works } from "../data/works";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Header />
+
+  <main>
+    <Gallery works={works} />
+
+    <section class="about container" id="about">
+      <p>
+        Luke Tava Rodriguez is an artist based in —. His work explores —.
+      </p>
+      <p>
+        For inquiries, commissions, or collaborations, reach out at
+        <a href="mailto:hello@luketavarodriguez.com">hello@luketavarodriguez.com</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <span>Luke Tava Rodriguez</span>
+    <span>© {new Date().getFullYear()}</span>
+  </footer>
+</BaseLayout>

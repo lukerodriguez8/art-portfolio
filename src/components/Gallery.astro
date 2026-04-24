@@ -1,0 +1,89 @@
+---
+import type { Work } from "../data/works";
+
+interface Props {
+  works: Work[];
+}
+
+const { works } = Astro.props;
+---
+
+<section class="gallery container">
+  {
+    works.length === 0 ? (
+      <div class="empty-state">
+        <p>Add your artwork to <code>src/data/works.ts</code> and drop files in <code>public/works/</code></p>
+      </div>
+    ) : (
+      <div class="gallery-grid">
+        {works.map((work, i) => (
+          <article
+            class="gallery-item reveal"
+            data-id={work.id}
+            data-src={`/works/${work.filename}`}
+            data-title={work.title}
+            data-meta={`${work.medium ? work.medium + " · " : ""}${work.year}`}
+          >
+            <figure>
+              <img
+                src={`/works/${work.filename}`}
+                alt={work.title}
+                width={work.width}
+                height={work.height}
+                loading={i < 4 ? "eager" : "lazy"}
+                decoding="async"
+                fetchpriority={i < 2 ? "high" : "auto"}
+              />
+            </figure>
+            <figcaption>
+              <span class="caption-title">{work.title}</span>
+              <span class="caption-meta">
+                {work.medium && `${work.medium} · `}{work.year}
+              </span>
+            </figcaption>
+          </article>
+        ))}
+      </div>
+    )
+  }
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+  <img id="lightbox-img" src="" alt="" />
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox")!;
+  const lbImg = document.getElementById("lightbox-img") as HTMLImageElement;
+  const lbCaption = document.getElementById("lightbox-caption")!;
+  const lbClose = document.getElementById("lightbox-close")!;
+
+  function open(src: string, alt: string, meta: string) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lbCaption.textContent = meta ? `${alt} — ${meta}` : alt;
+    lightbox.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    lightbox.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll<HTMLElement>(".gallery-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      const src = item.dataset.src ?? "";
+      const title = item.dataset.title ?? "";
+      const meta = item.dataset.meta ?? "";
+      open(src, title, meta);
+    });
+  });
+
+  lbClose.addEventListener("click", close);
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+</script>

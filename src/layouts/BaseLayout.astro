@@ -1,0 +1,56 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Luke Tava Rodriguez",
+  description = "Portfolio of Luke Tava Rodriguez",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Scroll reveal -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+      );
+
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import "../styles/global.css";
+</style>

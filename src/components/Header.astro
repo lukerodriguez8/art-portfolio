@@ -1,0 +1,12 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header container">
+  <a href="/" class="name">Luke Tava Rodriguez</a>
+  <nav>
+    <a href="/" class:list={[{ active: currentPath === "/" }]}>Work</a>
+    <a href="/#about" class:list={[{ active: currentPath === "/about" }]}>About</a>
+    <a href="mailto:hello@luketavarodriguez.com">Contact</a>
+  </nav>
+</header>
