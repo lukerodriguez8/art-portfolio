@@ -3,7 +3,6 @@ export interface Work {
   title: string;
   year: number;
   medium?: string;
-  series?: string; // e.g. "Notebook", "Paintings", etc.
   filename: string;
   width: number;
   height: number;
@@ -91,4 +90,49 @@ export const works: Work[] = [
     width: 2424,
     height: 1728,
   },
+  {
+    id: "img20220309-11145549",
+    title: "Img20220309 11145549",
+    year: 2026,
+    series: "Bent Wires",
+    filename: "img20220309_11145549.jpg",
+    width: 4252,
+    height: 4790,
+  },
+  {
+    id: "img20220309-11161338",
+    title: "Img20220309 11161338",
+    year: 2026,
+    series: "Bent Wires",
+    filename: "img20220309_11161338.jpg",
+    width: 5337,
+    height: 3677,
+  },
+  {
+    id: "img20220309-11165511",
+    title: "Img20220309 11165511",
+    year: 2026,
+    series: "Bent Wires",
+    filename: "img20220309_11165511.jpg",
+    width: 6444,
+    height: 3486,
+  },
+  {
+    id: "img20220309-11181820",
+    title: "Img20220309 11181820",
+    year: 2026,
+    series: "Bent Wires",
+    filename: "img20220309_11181820.jpg",
+    width: 3119,
+    height: 4256,
+  },
+  {
+    id: "img20220309-11251413",
+    title: "Img20220309 11251413",
+    year: 2026,
+    series: "Bent Wires",
+    filename: "img20220309_11251413.jpg",
+    width: 2841,
+    height: 3047,
+  }
 ];
